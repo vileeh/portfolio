@@ -1,0 +1,55 @@
+﻿
+.yhteystiedot {
+    margin: auto;
+    display: flex;
+    align-content: center;
+    padding: 2% 15% 175px 15%;
+    flex-direction: row;
+}
+
+.yhteystiedot-teksti {
+	text-align: center;
+	margin: auto;
+	margin: auto !important;
+	min-width: 375px !important;
+	max-width: 600px !important;
+	width: 100% !important;
+	display: flex;
+    flex-direction: column;
+}
+
+/* Clear floats after the columns */
+.row::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.yhteystiedot a {
+    background-color: rgba(148, 198, 208, 255);
+    font-size: 25px;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    color: rgba(0, 29, 47, 255);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    transition: ease 0.3s;
+    padding: 50px;
+	text-align: center !important;
+	width: 100% !important;
+	margin: 5px auto !important;
+}
+
+.yhteystiedot a:hover {
+    background-color: rgba(44, 149, 171, 255);
+    color: rgba(250, 247, 240, 255);
+    transition: ease 0.3s;
+}
+
+.yhteystiedot p {
+    font-size: 20px;
+    margin: 5px;
+    padding: 0 0 0 0;
+}
+

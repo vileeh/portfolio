@@ -1,0 +1,80 @@
+
+.valikoima {
+    display: flex;
+    flex-direction: column;
+    padding: 2% 15% 4% 15%;
+	justify-content: center;
+	text-align: center;
+}
+
+.gallery {
+    position: relative;
+    display: flex;
+    align-content: center;
+    width: 100%;
+    margin: 1% auto 0.5% auto;
+    height: 120px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color: black;
+    transition: height 0.5s ease;
+}
+
+.gallery img {
+    width: 100%;
+    height: auto;
+    z-index: -1;
+    border-radius: 10px;
+    object-fit: cover;
+    filter: brightness(50%)
+}
+
+.tuoteTeksti {
+    position: absolute;
+    top: 15%;
+    left: 2.5%;
+    color: white;
+    font-size: 1.5em;
+    font-weight: ;
+    z-index: 1;
+	text-align: left;
+}
+
+.more-text {
+	text-align: left;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.5s ease;
+}
+
+.more-text p {
+	font-size: 15px;
+}
+
+
+.gallery:hover {
+    height: 350px;
+    transition: height 0.5s ease;
+}
+
+.gallery:hover .tuoteTeksti {
+	top: 2%;
+	transition: all 0.3s ease;
+
+}
+
+.gallery:hover .more-text {
+	transition: all 0.5s allow-discrete;
+  max-height: 350px; /* adjust based on expected content size */
+  opacity: 1;
+}
+
+p {
+    margin-bottom: 1.5%;
+}
+
+@media (max-width: 800px) {
+    .valikoima {
+		padding: 6% 8% 6% 8%;
+    }
+}
