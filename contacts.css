@@ -3,15 +3,14 @@
     margin: auto;
     display: flex;
     align-content: center;
-    padding: 2% 15% 175px 15%;
+    padding: 3% 15% 170px 15%;
     flex-direction: row;
 }
 
 .yhteystiedot-teksti {
 	text-align: center;
 	margin: auto;
-	margin: auto !important;
-	min-width: 375px !important;
+	min-width: 25%;
 	max-width: 600px !important;
 	width: 100% !important;
 	display: flex;
@@ -25,9 +24,15 @@
     clear: both;
 }
 
-.yhteystiedot a {
-    background-color: rgb(163, 171, 176);
-
+@media (max-width: 800px) {
+    .yhteystiedot a {
+        padding: 30px !important;
+    }
+}
+        
+        
+        .yhteystiedot a {
+	background-color: rgb(163, 171, 176);
     font-size: 25px;
     border-radius: 5px;
     border: none;
@@ -53,5 +58,4 @@
     margin: 5px;
     padding: 0 0 0 0;
 }
-
 
