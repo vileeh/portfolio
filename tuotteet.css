@@ -1,10 +1,9 @@
-
 .valikoima {
     display: flex;
     flex-direction: column;
     padding: 2% 15% 4% 15%;
-	justify-content: center;
-	text-align: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .gallery {
@@ -14,19 +13,23 @@
     width: 100%;
     margin: 1% auto 0.5% auto;
     height: 120px;
+    min-height: 120px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     color: black;
     transition: height 0.5s ease;
+    overflow: hidden; /* ensure rounded corners hide overflow when overlay expands */
+    border-radius: 10px;
 }
 
-.gallery img {
-    width: 100%;
-    height: auto;
-    z-index: -1;
-    border-radius: 10px;
-    object-fit: cover;
-    filter: brightness(70%)
-}
+    .gallery img {
+        width: 100%;
+        height: auto;
+        z-index: -1;
+        border-radius: 10px;
+        object-fit: cover;
+        filter: brightness(70%);
+        display: block;
+    }
 
 .tuoteTeksti {
     position: absolute;
@@ -34,51 +37,151 @@
     left: 50%;
     transform: translate(-50%, 0);
     color: white;
-    font-size: 1.5em;
+    font-size: 1.2rem;
     z-index: 1;
-    text-align: center;
-    align-content: center;
+    text-align: left;
     background-color: rgba(0, 0, 0, 0.45);
     border-radius: 15px;
     width: 95%;
+    padding: 0.6rem 0.9rem;
+    box-sizing: border-box;
+    transition: top 0.3s ease, max-height 0.35s ease, padding 0.25s ease;
 }
 
 .more-text {
-    text-align: center;
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: max-height 0.5s ease, opacity 0.5s ease;
+    text-align: left;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
 }
 
-.more-text p {
-	font-size: 15px;
-}
+    .more-text p {
+        font-size: 15px;
+        margin: 0;
+    }
 
-
+/* Desktop / hover expansion */
 .gallery:hover {
     height: 350px;
-    transition: height 0.5s ease;
 }
 
-.gallery:hover .tuoteTeksti {
-	top: 2%;
-	transition: all 0.3s ease;
+    .gallery:hover .tuoteTeksti {
+        top: 2%;
+    }
 
+    .gallery:hover .more-text {
+        max-height: 350px;
+        opacity: 1;
+    }
+
+/* .expanded mirrors :hover for tap-to-toggle on touch devices */
+.gallery.expanded {
+    height: 350px;
 }
 
-.gallery:hover .more-text {
-	transition: all 0.5s allow-discrete;
-  max-height: 350px; /* adjust based on expected content size */
-  opacity: 1;
-}
+    .gallery.expanded .tuoteTeksti {
+        top: 2%;
+    }
 
+    .gallery.expanded .more-text {
+        max-height: 350px;
+        opacity: 1;
+    }
+
+/* General paragraph spacing */
 p {
     margin-bottom: 1.5%;
 }
 
+/* Responsive behaviour */
 @media (max-width: 800px) {
     .valikoima {
-		padding: 6% 8% 6% 8%;
+        padding: 6% 8% 6% 8%;
+    }
+
+    /* Let the gallery size to the image by default, but still allow hover/expanded to grow */
+    .gallery {
+        height: auto;
+        min-height: 140px;
+    }
+
+    /* Collapsed overlay: visible bottom strip by default on small screens */
+    .tuoteTeksti {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        transform: none;
+        width: 100%;
+        max-height: 40%; /* collapsed visible area */
+        box-sizing: border-box;
+        padding: 0.8rem;
+        border-radius: 0 0 10px 10px;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        z-index: 1;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        overflow: hidden;
+        transition: max-height 0.35s ease, padding 0.25s ease;
+    }
+
+        .tuoteTeksti > p:first-child {
+            margin: 0;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+    /* detailed text collapsed by default */
+    .more-text {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.35s ease, opacity 0.25s ease;
+    }
+
+        .more-text p {
+            margin: 0;
+            font-size: 15px;
+        }
+
+    /* When hovered (or expanded via JS), make overlay fill the image and enable scrolling */
+    .gallery:hover .tuoteTeksti,
+    .gallery.expanded .tuoteTeksti {
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        max-height: 100%;
+        padding: 1rem;
+        border-radius: 10px;
+    }
+
+    .gallery:hover .more-text,
+    .gallery.expanded .more-text {
+        max-height: calc(100% - 3.2rem); /* leave room for title and padding */
+        overflow-y: auto;
+        opacity: 1;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* keep title from stretching; allow more-text to flex and scroll */
+    .tuoteTeksti > p:first-child {
+        flex: 0 0 auto;
+    }
+
+    .more-text {
+        flex: 1 1 auto;
+    }
+
+    /* ensure text alignment remains left on small screens */
+    .more-text {
+        text-align: left !important;
+    }
+
+    .tuoteTeksti {
+        text-align: left !important;
     }
 }
